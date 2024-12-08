@@ -1,0 +1,136 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "postgresql"
+  url      = env("DATABASE_URL")
+}
+
+model User {
+  id                  String   @id @default(uuid())
+  telegramId          BigInt   @unique // Unique identifier from Telegram
+  firstName           String?
+  lastName            String?
+  username            String?  @unique // Telegram username, if available
+  isBot               Boolean  @default(false)
+  languageCode        String?
+  coursesBought       Course[] @relation("UserCourses")
+  hasPurchasedCourses Boolean  @default(false)
+  role                Role     @default(USER)
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Course {
+  id           String              @id @default(uuid())
+  translations CourseTranslation[] @relation("CourseTranslations") // Translations for i18n
+  files        File[]              @relation("CourseFiles")
+  usersBought  User[]              @relation("UserCourses")
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model CourseTranslation {
+  id               String   @id @default(uuid())
+  courseId         String
+  course           Course   @relation("CourseTranslations", fields: [courseId], references: [id])
+  language         Language // Language for this translation
+  title            String
+  description      String?
+  smallDescription String?
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+
+  @@unique([courseId, language]) // Ensure one translation per language per course
+}
+
+model Price {
+  id         String   @id @default(uuid())
+  currency   Currency
+  externalId String?  @unique // External CMS ID
+  amount     Float // Price amount in the given currency
+  createdAt  DateTime @default(now())
+}
+
+model File {
+  id         String     @id @default(uuid())
+  awsUrl     String
+  fileType   FileType
+  accessType AccessType
+  courseId   String
+  course     Course     @relation("CourseFiles", fields: [courseId], references: [id])
+
+  createdAt DateTime @default(now())
+  updatedAt DateTime @updatedAt
+}
+
+model Notification {
+  id        String           @id @default(uuid())
+  userId    String // User identifier
+  message   String // Feedback message
+  type      NotificationType
+  createdAt DateTime         @default(now())
+  read      Boolean          @default(false) // Mark feedback as read
+}
+
+model StripeEvent {
+  id        String   @id @default(uuid()) // Unique identifier for the event
+  stripeId  String   @unique // The Stripe event ID
+  type      String // Event type (e.g., checkout.session.completed)
+  data      Json // The raw event data
+  createdAt DateTime @default(now())
+  processed Boolean  @default(false)
+}
+
+// Enum for the contract status (can be customized)
+enum ContractStatus {
+  PENDING
+  PAID
+  FAILED
+  CANCELLED
+}
+
+enum FileType {
+  VIDEO
+  IMAGE
+  DOCUMENT
+  AUDIO
+}
+
+enum AccessType {
+  PUBLIC
+  PRIVATE
+}
+
+enum Currency {
+  USD
+  EUR
+  RUB
+}
+
+enum Role {
+  USER
+  ADMIN
+}
+
+// Supported languages for translations
+enum Language {
+  EN
+  RU
+  UKR
+}
+
+enum NotificationType {
+  PAYMENT_SUCCESSFUL
+  PAYMENT_FAILED
+}

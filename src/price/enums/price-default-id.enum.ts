@@ -1,0 +1,76 @@
+// We need a logic with discounts:
+// I purchase 2 courses at once, discount -> 10%
+// I purchase 3 courses at once, discount -> 20%
+// I purchase 4 courses at once, discount -> 25%
+// I purchase 5 courses at once, discount -> 30%
+// I purchase 6 courses at once, discount -> 35%
+
+// If I have already purchased one OR MORE courses, and I purchase ONE more, then the discount -> 10%
+// If I have already purchased one OR MORE courses, and I purchase TWO more courses -> 15%
+// If I have already purchased one OR MORE courses, and I purchase THREE more courses -> 20%
+// If I have already purchased one OR MORE courses, and I purchase FOUR more courses -> 25%
+// If I have already purchased one OR MORE courses, and I purchase FIVE more courses -> 30%
+
+export const DISCOUNT_ITERATIONS: { [key: string]: string } = {
+  FIRST: '10',
+  SECOND: '15',
+  THIRD: '20',
+  FOURTH: '25',
+  FIFTH: '30',
+  SIXTH: '35',
+};
+
+export const ALREADY_BOUGHT_PREFIX = 'already-bought-';
+
+export const PriceDefaultId = {
+  // No discount
+  DEFAULT_USD: 'default-usd-price',
+  DEFAULT_EUR: 'default-eur-price',
+  DEFAULT_RUB: 'default-rub-price',
+
+  // Discount for buying multiple courses at once
+  FIRST_DISCOUNT_USD: `${DISCOUNT_ITERATIONS.FIRST}-usd-price`,
+  FIRST_DISCOUNT_EUR: `${DISCOUNT_ITERATIONS.FIRST}-eur-price`,
+  FIRST_DISCOUNT_RUB: `${DISCOUNT_ITERATIONS.FIRST}-rub-price`,
+
+  SECOND_DISCOUNT_USD: `${DISCOUNT_ITERATIONS.SECOND}-usd-price`,
+  SECOND_DISCOUNT_EUR: `${DISCOUNT_ITERATIONS.SECOND}-eur-price`,
+  SECOND_DISCOUNT_RUB: `${DISCOUNT_ITERATIONS.SECOND}-rub-price`,
+
+  THIRD_DISCOUNT_USD: `${DISCOUNT_ITERATIONS.THIRD}-usd-price`,
+  THIRD_DISCOUNT_EUR: `${DISCOUNT_ITERATIONS.THIRD}-eur-price`,
+  THIRD_DISCOUNT_RUB: `${DISCOUNT_ITERATIONS.THIRD}-rub-price`,
+
+  FOURTH_DISCOUNT_USD: `${DISCOUNT_ITERATIONS.FOURTH}-usd-price`,
+  FOURTH_DISCOUNT_EUR: `${DISCOUNT_ITERATIONS.FOURTH}-eur-price`,
+  FOURTH_DISCOUNT_RUB: `${DISCOUNT_ITERATIONS.FOURTH}-rub-price`,
+
+  FIFTH_DISCOUNT_USD: `${DISCOUNT_ITERATIONS.FIFTH}-usd-price`,
+  FIFTH_DISCOUNT_EUR: `${DISCOUNT_ITERATIONS.FIFTH}-eur-price`,
+  FIFTH_DISCOUNT_RUB: `${DISCOUNT_ITERATIONS.FIFTH}-rub-price`,
+
+  SIXTH_DISCOUNT_USD: `${DISCOUNT_ITERATIONS.SIXTH}-usd-price`,
+  SIXTH_DISCOUNT_EUR: `${DISCOUNT_ITERATIONS.SIXTH}-eur-price`,
+  SIXTH_DISCOUNT_RUB: `${DISCOUNT_ITERATIONS.SIXTH}-rub-price`,
+
+  // Discount for buying more courses after already purchasing one or more
+  FIRST_DISCOUNT_ALREADY_BOUGHT_USD: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.FIRST}-usd-price`,
+  FIRST_DISCOUNT_ALREADY_BOUGHT_EUR: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.FIRST}-eur-price`,
+  FIRST_DISCOUNT_ALREADY_BOUGHT_RUB: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.FIRST}-rub-price`,
+
+  SECOND_DISCOUNT_ALREADY_BOUGHT_USD: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.SECOND}-usd-price`,
+  SECOND_DISCOUNT_ALREADY_BOUGHT_EUR: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.SECOND}-eur-price`,
+  SECOND_DISCOUNT_ALREADY_BOUGHT_RUB: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.SECOND}-rub-price`,
+
+  THIRD_DISCOUNT_ALREADY_BOUGHT_USD: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.THIRD}-usd-price`,
+  THIRD_DISCOUNT_ALREADY_BOUGHT_EUR: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.THIRD}-eur-price`,
+  THIRD_DISCOUNT_ALREADY_BOUGHT_RUB: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.THIRD}-rub-price`,
+
+  FOURTH_DISCOUNT_ALREADY_BOUGHT_USD: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.FOURTH}-usd-price`,
+  FOURTH_DISCOUNT_ALREADY_BOUGHT_EUR: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.FOURTH}-eur-price`,
+  FOURTH_DISCOUNT_ALREADY_BOUGHT_RUB: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.FOURTH}-rub-price`,
+
+  FIFTH_DISCOUNT_ALREADY_BOUGHT_USD: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.FIFTH}-usd-price`,
+  FIFTH_DISCOUNT_ALREADY_BOUGHT_EUR: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.FIFTH}-eur-price`,
+  FIFTH_DISCOUNT_ALREADY_BOUGHT_RUB: `${ALREADY_BOUGHT_PREFIX}${DISCOUNT_ITERATIONS.FIFTH}-rub-price`,
+} as const;
