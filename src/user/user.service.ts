@@ -39,7 +39,6 @@ export class UserService {
         coursesBought: {
           connect: courseIds.map((courseId) => ({ id: courseId })),
         },
-        hasPurchasedCourses: true,
       },
     });
   }
