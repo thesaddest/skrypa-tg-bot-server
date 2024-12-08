@@ -17,6 +17,7 @@ export class UserService {
     this.logger.debug(`Getting user with telegramId: ${telegramId}`);
     return this.dbService.findUnique(this.dbService.user, {
       where: { telegramId },
+      include: { coursesBought: true },
     });
   }
 
