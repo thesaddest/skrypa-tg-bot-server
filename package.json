@@ -11,7 +11,7 @@
     "start": "nest start",
     "start:dev": "nest start --watch",
     "start:debug": "nest start --debug --watch",
-    "start:prod": "node dist/main",
+    "start:prod": "node dist/src/main",
     "seed": "ts-node prisma/seed.ts",
     "db:prepare": "npx prisma migrate dev && npm run seed",
     "lint": "eslint \"{src,apps,libs,test}/**/*.ts\" --fix",
