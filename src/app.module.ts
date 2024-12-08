@@ -3,7 +3,6 @@ import { ConfigModule } from './config/config.module';
 import { TelegramModule } from './telegram/telegram.module';
 import { DbModule } from './db/db.module';
 import { UserModule } from './user/user.module';
-import { LavaTopModule } from './lava-top/lava-top.module';
 import { AxiosService } from './common/axios/axios.service';
 import { AxiosModule } from './common/axios/axios.module';
 import { AuthModule } from './auth/auth.module';
@@ -19,7 +18,6 @@ import { NotificationModule } from './notification/notification.module';
     TelegramModule,
     DbModule,
     UserModule,
-    LavaTopModule,
     AxiosModule,
     AuthModule,
     CourseModule,

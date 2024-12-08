@@ -19,10 +19,6 @@ export const Configuration = () => ({
   tg: {
     api_token: process.env.TELEGRAM_API_TOKEN,
   },
-  lava_top: {
-    api_key: process.env.LAVA_TOP_API_KEY,
-    api_url: process.env.LAVA_TOP_URL,
-  },
   stripe: {
     secret_key: process.env.STRIPE_SECRET_KEY,
     public_key: process.env.STRIPE_PUBLIC_KEY,
@@ -40,9 +36,6 @@ export const ConfigurationValidationSchema = Joi.object({
   DATABASE_URL: Joi.string().required(),
 
   TELEGRAM_API_TOKEN: Joi.string().required(),
-
-  LAVA_TOP_API_KEY: Joi.string().required(),
-  LAVA_TOP_URL: Joi.string().required(),
 
   JWT_SECRET: Joi.string().required(),
 });

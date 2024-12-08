@@ -20,9 +20,6 @@ class CourseTranslationDto {
 }
 
 export class CreateCourseDto {
-  @IsString()
-  externalId: string;
-
   @ValidateNested({ each: true })
   @IsArray()
   @Type(() => CourseTranslationDto)
