@@ -188,7 +188,7 @@ export class PaymentService {
   }
 
   private async getAllPrices(): Promise<Stripe.Price[]> {
-    const prices = await this.stripe.prices.list();
+    const prices = await this.stripe.prices.list({ limit: 100 });
     return prices.data;
   }
 }
