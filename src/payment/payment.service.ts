@@ -39,7 +39,7 @@ export class PaymentService {
 
     try {
       const prices = await this.getAllPrices();
-      console.log(`Available prices: ${JSON.stringify(prices)}`);
+      this.logger.log(`Available prices: ${JSON.stringify(prices)}`);
       const matchedPrice = prices.find((p) => p.unit_amount === price * 100);
 
       if (!matchedPrice) {
