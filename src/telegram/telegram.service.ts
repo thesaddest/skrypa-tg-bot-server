@@ -9,14 +9,20 @@ export class TelegramService implements OnModuleInit {
 
   constructor(private readonly configService: ConfigService) {
     this.bot = new TelegramBot(this.configService.get<string>('tg.api_token'), {
-      polling: true,
+      polling: false,
     });
     this.clientUrl = this.configService.get<string>('app.client_url');
   }
 
   async onModuleInit() {
-    // Listen to messages and handle them
-    this.bot.on('message', async (msg) => await this.handleStartCommand(msg));
+    const webhookUrl = this.configService.get<string>('app.webhook_url');
+    await this.bot.setWebHook(`${webhookUrl}/telegram/webhook`);
+  }
+
+  async handleWebhookUpdate(update: TelegramBot.Update) {
+    if (update.message) {
+      await this.handleStartCommand(update.message);
+    }
   }
 
   private async handleStartCommand(msg: TelegramBot.Message) {

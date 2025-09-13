@@ -9,6 +9,7 @@ export const Configuration = () => ({
     node_env: process.env.NODE_ENV,
     log_level: process.env.LOG_LEVEL,
     client_url: process.env.CLIENT_URL,
+    webhook_url: process.env.WEBHOOK_URL,
   },
   auth: {
     jwt_secret: process.env.JWT_SECRET,
@@ -32,6 +33,7 @@ export const ConfigurationValidationSchema = Joi.object({
   NODE_ENV: Joi.string().required(),
   LOG_LEVEL: Joi.string().required(),
   CLIENT_URL: Joi.string().required(),
+  WEBHOOK_URL: Joi.string().required(),
 
   DATABASE_URL: Joi.string().required(),
 
