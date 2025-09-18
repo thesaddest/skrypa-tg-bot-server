@@ -20,12 +20,18 @@ export class TelegramService implements OnModuleInit {
   }
 
   async handleWebhookUpdate(update: TelegramBot.Update) {
+    console.log('Webhook received:', JSON.stringify(update, null, 2));
+
     if (update.message) {
+      console.log('Message received:', update.message.text);
       await this.handleStartCommand(update.message);
+    } else {
+      console.log('No message in update');
     }
   }
 
   private async handleStartCommand(msg: TelegramBot.Message) {
+    console.log('Handling start command for chat:', msg.chat.id);
     const chatId = msg.chat.id;
 
     await this.bot.sendMessage(
@@ -44,5 +50,6 @@ export class TelegramService implements OnModuleInit {
         },
       },
     );
+    console.log('Message sent successfully');
   }
 }
